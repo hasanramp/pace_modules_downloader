@@ -83,19 +83,30 @@ def save_in_temp(link):
         f.write(link + '\n')
     return
 
+def get_login_data():
+    with open('cred.json', 'r') as f:
+        cred_json = json.loads(f.read())
+        email = cred_json['email']
+        pswd = cred_json['pswd']
+
+    return email, pswd
+
 def login():
     print('logging in...')
     # email_input = driver.find_element_by_id('edit-name-1')
     email_input = driver.find_element(By.ID, 'edit-name-1')
-    email_input.send_keys('rampurawalahasan4@gmail.com')
+    email, pswd = get_login_data()
+    email_input.send_keys(email)
 
     # password_input = driver.find_element_by_id('edit-pass-1')
     password_input = driver.find_element(By.ID, 'edit-pass-1')
-    password_input.send_keys('Istudyinpace1!')
+    password_input.send_keys(pswd)
 
     # login_button = driver.find_element_by_id('edit-submit-1')
     login_button = driver.find_element(By.ID, 'edit-submit-1')
     login_button.click()
+
+
 
 option = webdriver.ChromeOptions()
 
